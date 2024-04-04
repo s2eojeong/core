@@ -9,25 +9,30 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig { // 공연 기획자
+    @Bean
     public MemberService memberService(){ // 역할
         return new MemberServiceImpl(memberRepository()); // 구현
     }
-
-    private MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
+    @Bean
+    public MemberRepository memberRepository() { //역할 (interface)
+        return new MemoryMemberRepository(); // 구현 (class)
     }
-
-    public OrderService orderService(){
-        return new OrderServiceImpl(
+    @Bean
+    public OrderService orderService(){ //역할
+        return new OrderServiceImpl( //구현
                 memberRepository(),
                 discountPolicy()
         );
     }
-    public DiscountPolicy discountPolicy(){
-//        return new FixDoiscountPolicy();
-        return new RateDiscountPolicy();
+    @Bean
+    public DiscountPolicy discountPolicy(){ //역할
+//        return new FixDoiscountPolicy(); //구현
+        return new RateDiscountPolicy(); //구현
     }
     // 역할과 구현이 한눈에 들어옴. Fix -> Rate 등으로 쉽게 구체 객체를 바꿀 수 있음.
 
