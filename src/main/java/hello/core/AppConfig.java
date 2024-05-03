@@ -31,9 +31,8 @@ public class AppConfig { // 공연 기획자
     }
     @Bean
     public DiscountPolicy discountPolicy(){ //역할
-//        return new FixDoiscountPolicy(); //구현
+//        return new FixDiscountPolicy(); //구현
         return new RateDiscountPolicy(); //구현
     }
     // 역할과 구현이 한눈에 들어옴. Fix -> Rate 등으로 쉽게 구체 객체를 바꿀 수 있음.
-
 }
