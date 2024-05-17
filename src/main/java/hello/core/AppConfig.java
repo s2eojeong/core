@@ -14,16 +14,34 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig { // 공연 기획자
+
+    //@Bean memberService -> new MemoryMemberRepository()
+    //@Bean orderService -> new MemoryMemberRepository()
+
+    //call AppConfig.memberService
+    //call AppConfig.memberRepository
+    //call AppConfig.memberRepository
+    //call AppConfig.orderService
+    //call AppConfig.memberRepository
+
+    //실제
+    //call AppConfig.memberService
+    //call AppConfig.memberRepository
+    //call AppConfig.orderService
+
     @Bean
     public MemberService memberService(){ // 역할
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository()); // 구현
     }
     @Bean
     public MemberRepository memberRepository() { //역할 (interface)
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository(); // 구현 (class)
     }
     @Bean
     public OrderService orderService(){ //역할
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl( //구현
                 memberRepository(),
                 discountPolicy()

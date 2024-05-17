@@ -15,7 +15,6 @@ public class OrderServiceImpl implements OrderService{
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-
     //    private final DiscountPolicy discountPolicy = new FixDoiscountPolicy();
     //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
     @Override
@@ -24,5 +23,9 @@ public class OrderServiceImpl implements OrderService{
         int discountPrice = discountPolicy.discount(member, itemPrice);
 
         return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+    // 테스트 용도
+    public MemberRepository getMemberRepository(){
+        return memberRepository;
     }
 }
